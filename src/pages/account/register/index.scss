@@ -1,0 +1,18 @@
+@import "~@src/style/index.scss";
+
+.form_wrap{
+    margin-top:20px;
+    padding:20px;
+    background:$bg_white;
+    border-radius:$radius_size;
+    min-width:350px;
+}
+.form_title{
+        text-align:center;
+        color:$primary_font_color;
+        font-size:20px;
+}
+.button_group{
+    display:flex;
+    justify-content:space-around;
+}

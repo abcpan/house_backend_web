@@ -1,0 +1,16 @@
+.clear_fix{
+    &::after{
+        display:block;
+        content:"";
+        height:0;
+        clear:both;
+    }
+}
+
+
+$background_blue:#20a0ff;
+$bg_white:#fff;
+$primary_font_color:#666;
+$ghost_font_color: #999;
+$radius_size:4px;
+$logo_font_color:#fff;

@@ -1,0 +1,17 @@
+@import "~@src/style/index.scss";
+%common{
+  height:10vh;
+  text-align:center;
+  line-height:10vh;
+}
+.footer{
+    height:20vh;
+}
+.footer_title{
+    color:$primary_font_color;
+    @extend %common;
+}
+.footer_desc{
+  @extend %common;
+  color:$ghost_font_color;
+}    

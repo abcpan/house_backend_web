@@ -1,0 +1,22 @@
+@import "~@src/style/index.scss";
+.content_body{
+    height:70vh;
+    background:$bg_white;
+    background:url("./images/background.jpg");
+    background-size:100% 100%;
+    background-position:center center;
+}
+.body_text{
+  font-size:35px;
+  color:#ffff;
+  padding:50px;
+  color:$logo_font_color;
+  text-align-last:center;
+}
+.body_row{
+    height:100%;
+}
+.body_col{
+    display:flex;
+    align-items:center;
+}

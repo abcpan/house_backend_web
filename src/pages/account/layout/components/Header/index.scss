@@ -1,0 +1,37 @@
+@import "~@src/style/index.scss";
+
+.heaer{
+        height:10vh;
+}
+.logo_wrap{
+   img{
+       width:265px;
+       height:60px;
+       filter: brightness(163%);
+   }
+}
+.nav_wrap{
+    text-align:right;
+    height:100%;
+}
+.nav_item{
+    display:inline-block;
+    text-decoration:none;
+    vertical-align:middle;
+    border-radius: $radius_size;
+    color:$primary_font_color;
+    position: relative;
+    padding:4px 7px;
+    &:hover{
+        &:after{
+            display:block;
+            content:"";
+            position:bottom;
+            width:100%;
+            height:2px;
+            top:5px;
+            margin:0 auto;
+            background:$primary_font_color;
+        }
+    }
+}

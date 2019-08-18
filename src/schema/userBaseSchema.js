@@ -1,0 +1,60 @@
+module.exports={
+  name:{
+    label:"用户名",
+    min:2,
+    max:15,
+    reg:/^[a-zA-Z\u4e00-\u9fa5]{1}[a-zA-Z0-9_\u4e00-\u9fa5]{1,9}$/,
+    emptyText:"请输入用户名",
+    errorText:"请输入正确格式的用户名",
+    sizeText:"用户名长度必须大于等于2位小于等于11位",
+    index:1
+  },
+  gender:{
+    label:"性别",
+    options:[
+      {label:"男",value:0},
+      {label:"女",value:1}
+    ],
+    defaultValue:0,
+    index:2,
+  },
+  mobile:{
+    label:"手机号",
+    emptyText:"请输入手机号",
+    reg:/^1[3456789]\d{9}$/,
+    errorText:"请输入正确格式手机号",
+    index:3
+  },
+  email:{
+    label: "邮箱",
+    emptyText:"请输入邮箱",
+    reg:/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/,
+    errorText:"请输入正确格式邮箱",
+    index:4
+  },
+  aboutMe:{
+    label:"个人简介",
+    index:5
+  },
+  passwd:{
+    label:"密码",
+    emptyText:"请输入密码",
+    reg:/^[\w-_]{6,16}$/,
+    min:6,
+    max:16,
+    sizeText:"密码长度必须大于6位小于16位"
+  },
+  confirmPasswd:{
+    label:"确认密码",
+    emptyText:"请输入密码",
+    reg:/^[\w-_]{6,16}$/,
+    min:6,
+    max:16,
+    sizeText:"密码长度必须大于6位小于16位",
+    isNotSameText:"两次输入的密码不一致"
+  }
+}
+
+           
+            
+            

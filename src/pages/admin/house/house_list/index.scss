@@ -1,0 +1,10 @@
+@import "~@src/style/var.scss";
+.desc{
+    width:200px;
+    display:flex;
+    justify-content:space-between;
+    margin-right:20px;
+}
+.opera{
+  color:$blue-color;
+}

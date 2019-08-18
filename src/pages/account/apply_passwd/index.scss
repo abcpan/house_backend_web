@@ -1,0 +1,23 @@
+@import "~@src/style/index.scss";
+
+.form_wrap{
+    padding:20px;
+    background:$bg_white;
+    border-radius:$radius_size;
+    min-width:350px;
+}
+.form_title{
+        text-align:center;
+        color:$primary_font_color;
+        font-size:20px;
+        margin-bottom:30px;
+}
+.button_group{
+        display:flex;
+        justify-content:space-around;
+}
+.form_tip{
+    margin-top:5px;
+    color:$background_blue;
+    text-align:right;
+}
