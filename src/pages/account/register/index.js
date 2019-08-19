@@ -32,6 +32,9 @@ function Register(props){
     const handleReset=()=>{
           props.form.resetFields();
     }
+    const handleRoute=()=>{
+      props.history.push("/user/login")
+    }
     const { getFieldDecorator } = props.form;
     return props.isRegister?
           <Redirect to="/send_email"/>
@@ -110,6 +113,9 @@ function Register(props){
                 <div className={styles.button_group}>
                       <Button type="primary" onClick={handleSubmit}>提交</Button>
                       <Button onClick={handleReset}>重置</Button>
+                </div>
+                <div className={styles.tip}>
+                    <span onClick={handleRoute}>已经有账号,去登录</span>
                 </div>
                 </Form>
             </div>
