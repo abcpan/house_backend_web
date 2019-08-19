@@ -17,7 +17,7 @@ import {
 } from "@src/redux/user/actions"
 import { withRouter } from 'react-router-dom';
 import ImgUpload from "@src/components/ImgUpload"
-const USER_INFO_URL = "/admin/user_info"
+const USER_INFO_URL = "/admin/info"
 const CHANGE_PASSWD_URL = "/user/change_passwd"
 const TIPDURATION = 1.8
 function Header(props){
