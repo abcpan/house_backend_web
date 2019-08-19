@@ -52,32 +52,32 @@ export const updateAvatar=(params)=>{
    
 //添加房产
 export const  addHouse=(params)=>{
-    return http.post("backend/houses/house_add",params);
+    return http.post("backend/house/house_add",params);
 }
 
 //获取房产列表
 export const getHouseList=(params)=>{
-  return http.post("backend/houses/house_list",params);
+  return http.post("backend/house/house_list",params);
 }
 //删除
 export const deleteHouse=(params)=>{
-  return http.post("backend/houses/house_del",params)
+  return http.post("backend/house/house_del",params)
 }
 //下架房产
 export const offHouse=(params)=>{
-  return http.post("backend/houses/house_off",params)
+  return http.post("backend/house/house_off",params)
 }
 //上架房产
 export const onHouse=(params)=>{
-  return http.post("backend/houses/house_on",params)
+  return http.post("backend/house/house_on",params)
 }
 //获取单个房产详情
 export const getHouseDetail=(params)=>{
-  return http.post("backend/houses/house_detail",params)
+  return http.post("backend/house/house_detail",params)
 }
 
 //跟新房产信息
 export const updateHouse=(params)=>{
-  return http.post("backend/houses/house_update",params)
+  return http.post("backend/house/house_update",params)
 }
 
