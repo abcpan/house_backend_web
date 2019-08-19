@@ -44,29 +44,18 @@ export default function(){
           <Route path="/admin" render={()=>
               <AdminLayout>
                   <Switch>
-                    <Route path="/admin/home" component={Home}></Route>
+                    <Route path="/admin/home" component={Home}/>
                     <Route path="/admin/info" component={UserInfo}/>
-                    <Route path="/admin/house" render={()=>
-                      <House>
-                          <Switch>
-                            <Route path="/admin/house/add" component={HouseAdd}/>
-                            <Route path="/admin/house/list" component={HouseList}/>
-                            <Route path="/admin/house/detail" component={HouseDetail}/>
-                            <Route path="/admin/house/analyse" component={HouseAnalyse}/>
-                            <Route path="/admin/house/result" component={HouseResult}/>
-                            <Redirect to="/admin/house/list"/>
-                          </Switch>
-                      </House>
-                        
-                    }/>
-                    
+                    <Route path="/admin/house/add" component={HouseAdd}/>
+                    <Route path="/admin/house/list" component={HouseList}/>
+                    <Route path="/admin/house/detail" component={HouseDetail}/>
+                    <Route path="/admin/house/analyse" component={HouseAnalyse}/>
+                    <Route path="/admin/house/result" component={HouseResult}/>
                   </Switch>
-                  {/* 临时重定向 */}
-                  <Redirect to="/admin/house/list"/>
               </AdminLayout> 
           }>
           </Route>
-          <Redirect to="/user/login"/>
+          <Route component={Login}/>
         </Switch>
     </App>
     </Router>

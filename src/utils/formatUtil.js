@@ -13,14 +13,38 @@ export const findLabel=(value,options)=>{
   let option = options.find(_=>_.value===value);
   return option?option.label:""
 }
-
-export function findLabelList(values,options,pattern){
+/**
+ * 
+ * @param {*} values 
+ * @param {*} options 
+ * @param {*} pattern 
+ */
+export function findLabelList(values,options){
+    if(!Array.isArray(values)){
+      return []
+    }
     let list = values.map(value=>{
         let option = options.find(item=>item.value===value);
         return option?option.label:""
     })
-    if(pattern !==undefined){
-        return list.join(pattern)
-    }
     return list;
+}
+/**
+ * 
+ * @param {*} originList 
+ * @param {*} type 
+ */
+
+export function transTypeFromList(originList,type){
+  if(!Array.isArray(originList)){
+    return []
+  }
+  return originList.map(item=>{
+    if(type==="string"){
+      return String(item)
+    }
+    if(type==="number"){
+      return Number(item)
+    }
+  })
 }

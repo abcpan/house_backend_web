@@ -84,28 +84,33 @@ function Person(props){
     
     return (
         <div>
-            <Descriptions title="个人信息" size="small">
-                    {renderUserBase(props.userInfo)}
-            </Descriptions>
-            <Row type="flex" justify="end" style={{marginTop:30}}>
-                  <Button type="primary" onClick={()=>handleClick("base")}>修改</Button>
-            </Row>
+            <div className={styles.desc_item}>
+                  <Descriptions title="个人信息" size="small" className={styles.description}>
+                          {renderUserBase(props.userInfo)}
+                  </Descriptions>
+                  <Row type="flex" justify="end" style={{marginTop:30}}>
+                        <Button type="primary" onClick={()=>handleClick("base")}>修改</Button>
+                  </Row>
+            </div>
+            <div className={styles.desc_item}>
+                <Descriptions title="认证信息" size="small" className={styles.description}>
+                    {
+                      props.userInfo.authInfo ===undefined?
+                      <Item>暂无相关数据</Item>
+                      :renderUserAuth(props.userInfo.authInfo)
+                    }
+                </Descriptions>
+                <Row type="flex" justify="end" style={{marginTop:30}}>
+                        <Button type="primary" onClick={()=>handleClick("auth")}>{isAuth?"修改实名信息":"去实名认证"}</Button>
+                </Row>
+            </div>
             <EditModal 
                 visible={isShowBaseModal}
                 handleOk={(value)=>handleSubmit("base",value)}
                 handleCancel={()=>{setIsShowBaseModal(preState=>!preState)}}
                 userInfo={userInfo}
             />
-            <Descriptions title="认证信息" size="small">
-                {
-                   props.userInfo.authInfo ===undefined?
-                   <Item>暂无相关数据</Item>
-                   :renderUserAuth(props.userInfo.authInfo)
-                }
-            </Descriptions>
-            <Row type="flex" justify="end" style={{marginTop:30}}>
-                    <Button type="primary" onClick={()=>handleClick("auth")}>{isAuth?"修改实名信息":"去实名认证"}</Button>
-            </Row>
+            
             <EmailModal
                visible={isShowEmailModal}
                handleOk={()=>handleSubmit("email")}

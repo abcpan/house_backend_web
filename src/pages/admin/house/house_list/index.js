@@ -1,6 +1,7 @@
 import React,{
   useEffect,
-  useState
+  useState,
+  useCallback
 }
 from "react"
 import {connect} from "react-redux"
@@ -17,12 +18,14 @@ import {
   deleteHouseAsync,
   offHouseAsync,
   onHouseAsync,
+  updateHouseAsync
 } from "@src/redux/house/actions"
 import houseSchema  from '@src/schema/houseSchema';
 import {findLabel,findLabelList} from "@src/utils/formatUtil"
 import SearchForm from "./components/SearchForm"
 import { ON_SALE,OFF_SALE } from './../../../../consts/index';
 import HouseDetailModal from "./components/DetailModal"
+import HouseEditModal from "./components/EditModal"
 const DELETE="delete";
 const EDIT ="edit"
 const SALE = "sale"
@@ -38,8 +41,10 @@ function HouseList(props){
     deleteHouseAsync,
     offHouseAsync,
     onHouseAsync,
+    updateHouseAsync
   }=props;
   const [isShowDetail,setIsShowDetail] = useState(false);
+  const [isShowHouseEditModal,setIsShowHouseEditModal] = useState(false);
   const [currentHosue,setCurrentHouse] =useState({})
   useEffect(()=>{
     getHosuePageAsync()
@@ -48,12 +53,15 @@ function HouseList(props){
       changeSearch(kv);
   }
   const handleOpera=(type,houseId,extra)=>{
-    //阻止事件冒泡
     switch(type){
       case EDIT:
-          return;
+          let updateHouse = list.find(_=>_.houseId===houseId);
+          setCurrentHouse(updateHouse)
+          setIsShowHouseEditModal(pre=>!pre);
+          break 
       case DELETE:
-          return deleteHouseAsync(houseId);
+          deleteHouseAsync(houseId);
+          break;
       case SALE:
           if(extra===ON_SALE){
             offHouseAsync(houseId);
@@ -61,22 +69,32 @@ function HouseList(props){
           if(extra===OFF_SALE){
             onHouseAsync(houseId)
           }
-          return;
+          break;
       case DETAIL:
-          let house = list.find(_=>_.houseId===houseId);
-          setCurrentHouse(house)
+          let detailHouse = list.find(_=>_.houseId===houseId);
+          setCurrentHouse(detailHouse)
           setIsShowDetail(pre=>!pre);
-          return 
+          break 
       default:
           return;
     }
   }
+  //修改房产详细信息
+
+    const handleUpdateHouse=(form)=>{
+      let {houseId} = currentHosue;
+      form.houseId = houseId
+      updateHouseAsync(form);
+      setIsShowHouseEditModal(pre=>!pre)
+    }
     return (
         <div>
             <SearchForm
                 onChange={handleChange}
+                params={params}
             />
             <List
+              className={styles.list}
               loading={isLoading}
               itemLayout="horizontal"
               dataSource={list}
@@ -143,6 +161,12 @@ function HouseList(props){
               handleCancel={()=>setIsShowDetail(pre=>!pre)}
               info ={currentHosue}
             />
+            <HouseEditModal
+              visible={isShowHouseEditModal}
+              handleOk={handleUpdateHouse}
+              handleCancel={()=>setIsShowHouseEditModal(pre=>!pre)}
+              info={currentHosue}
+            />
         </div>
     )
 }
@@ -152,7 +176,7 @@ function mapStateFromProps(state){
       isLoading:state.house.isLoading,
       params:state.house.params,
       totalCount:state.house.totalCount,
-      houseDetail:state.house.houseDetail
+      houseDetail:state.house.houseDetail,
     }
 }
 export default connect(mapStateFromProps,{
@@ -161,4 +185,5 @@ export default connect(mapStateFromProps,{
   deleteHouseAsync,
   offHouseAsync,
   onHouseAsync,
+  updateHouseAsync
 })(HouseList)

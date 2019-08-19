@@ -1,13 +1,17 @@
+@import "~@src/style/index.scss";
+@import "~@src/style/var.scss";
+.layout{
+  height:100vh;
+}
+.side_layout{
 
-.nav_left{
-    background-color:#001529;
-    height:100vh;
 }
-.main{
-    height:100vh;
+.header_layout{
+  background:#ffff;
+  height:fit-content;
+  border-bottom:1px solid $border-color;
 }
-.content{
+.content_layout{
     padding:50px;
-    height:90vh;
     overflow-y:scroll;
 }

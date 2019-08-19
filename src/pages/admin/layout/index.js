@@ -2,27 +2,32 @@ import React from "react"
 import {connect} from "react-redux"
 import {Redirect} from "react-router-dom"
 import LeftNav from "./components/LeftNav"
-import Header from "./components/Header"
-import {Row,Col} from "antd"
+import SideHeader from "./components/Header"
+import {
+  Row,
+  Col,
+  Layout
+} from "antd"
 import styles from "./index.scss";
+const { Header, Content, Footer, Sider } = Layout;
 function AdminLayout (props){
     return (
-          <Row>
-              <Col span={4} className={styles.nav_left}>
+          <Layout className={styles.layout}>
+            <Sider  className={styles.side_layout}>
                 <LeftNav/>
-              </Col>
-              <Col span={20} className={styles.main}>
-                  <Header/>
-                  <Row>
-                      <div className={styles.content}>
-                            {
-                                props.isLogin?props.children:<Redirect to="/user/login"/>
-                            }
-                      </div>
-                      
-                  </Row>
-              </Col>
-          </Row>
+            </Sider>
+            <Layout>
+              <Header className={styles.header_layout}>
+                <SideHeader/>
+              </Header>
+              <Content className={styles.content_layout}>
+                  {
+                    props.isLogin?props.children:<Redirect to="/user/login"/>
+                  }
+              </Content>
+            </Layout>
+          </Layout>
+          
     )
 }
 function mapStateFromState(state){

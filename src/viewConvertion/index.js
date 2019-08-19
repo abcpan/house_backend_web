@@ -1,6 +1,7 @@
 import userBaseSchema from "@src/schema/userBaseSchema.js"
 import userAuthSchema from "@src/schema/userAuthSchema.js"
 import houseSchema  from '@src/schema/houseSchema';
+import { findLabelList,findLabel } from './../utils/formatUtil';
 //转换函数
 function getViewList(info,config){
     if(typeof info !=="object" || !config ||Object.keys(info).length ===0){
@@ -18,10 +19,10 @@ function getViewList(info,config){
         const viewOrigin = map.get(key);
         //如果选项存在
         if(viewOrigin.options){
-              let option = viewOrigin.options.find(_=>_.value===value)
+              let valueLabel = findLabel(value,viewOrigin.options)
               viewList.push({
                 label:viewOrigin.label,
-                value:option? option.label :value,
+                value:valueLabel? valueLabel:value,
                 index:viewOrigin.index
               })
         }else{
@@ -79,12 +80,7 @@ export function getHouseDetailView(info,config=houseSchema){
         index:config["location"].index
     })
     //组装属性
-    let props = properties.map(_=>{
-        let option = config["properties"].options.find(item=>item.value == _)
-        if(option){
-          return option.label;
-        }
-    })
+    let props =findLabelList(properties,config.properties.options)
     //弄成字符串
     viewList.push({
         label: config["properties"].label,

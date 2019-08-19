@@ -4,7 +4,8 @@ import {
   deleteHouse,
   offHouse,
   onHouse,
-  getHouseDetail
+  getHouseDetail,
+  updateHouse
 } from "@src/api"
 import Service from "./service"
 import {SUCCESS_CODE} from "@src/consts/code"
@@ -98,6 +99,22 @@ class HouseService extends Service {
         console.log(error);
       }
       return detail
+    }
+
+    //更新房产信息
+    async handleUpdateHouse(params){
+      let isDone = false;
+      try{
+         let res = await updateHouse(params);
+         if(res.code ==SUCCESS_CODE){
+           isDone = true;
+         }else{
+           this.notifyError(res.message);
+         }
+      }catch(error){
+        console.log(error);
+      }
+      return isDone;
     }
 }
 

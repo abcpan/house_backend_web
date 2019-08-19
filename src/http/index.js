@@ -45,7 +45,12 @@ class HTTP{
           return Object.assign({},this.headers,headers)
     }
     getReqPath(uri){
-          return this.baseURL+"/"+uri;
+          if(uri.startsWith("/")){
+            return this.baseURL+uri
+          }else{
+            return this.baseURL+"/"+uri;
+          }
+          
     }
     handleError(res,callback){
       const {code } =res;

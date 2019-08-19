@@ -30,6 +30,7 @@ function SearchForm(props){
           props.onChange({[key]:value})
       },500)
     }
+    const params= props.params?props.params:{}
     return (
         <div style={{marginBottom:30}}>
            <Card title="条件搜索">
@@ -37,12 +38,12 @@ function SearchForm(props){
                 <Row>
                   <Col span={6}>
                     <Form.Item label="房产名称">
-                        <Input onChange={({target})=>handleChange("name",target.value)}/>
+                        <Input onChange={({target})=>handleChange("name",target.value)} defaultValue={params.name}/>
                     </Form.Item>
                   </Col>
                   <Col span={6}>
                     <Form.Item label="价格排序">
-                        <Select  onChange={(value)=>handleChange("sort",value)}>
+                        <Select  onChange={(value)=>handleChange("sort",value)} defaultValue={params.sort}>
                           {
                               houseSchema.priceSort.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
@@ -53,7 +54,7 @@ function SearchForm(props){
                   </Col>
                   <Col span={6}>
                     <Form.Item label="交易类型">
-                        <Select onChange={(value)=>handleChange("tradeType",value)}>
+                        <Select onChange={(value)=>handleChange("tradeType",value)} defaultValue={params.tradeType}>
                             {
                               houseSchema.tradeType.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
@@ -65,7 +66,7 @@ function SearchForm(props){
                   </Col>
                   <Col span={6}>
                     <Form.Item label="售卖状态">
-                        <Select style={{ width: 120 }} onChange={(value)=>handleChange("state",value)}>
+                        <Select style={{ width: 120 }} onChange={(value)=>handleChange("state",value)} defaultValue={params.state}>
                             {
                               houseSchema.state.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
@@ -79,6 +80,7 @@ function SearchForm(props){
                     <Form.Item label={houseSchema.location.label}>
                         <LocationPicker
                           onChange={(value)=>handleChange("location",value)}
+                          defaultValue={params.location}
                         />
                     </Form.Item>
                   </Col>

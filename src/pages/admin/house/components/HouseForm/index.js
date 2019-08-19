@@ -1,5 +1,6 @@
 import React,{
-  useState
+  useState,
+  useEffect
 }
 from "react"
 import {
@@ -22,14 +23,15 @@ import uploadService from "@src/service/uploadService"
 const {Option} = Select
 function HouseEdit(props){
     const forItemLayout={
-      labelCol:{span:6},
-      wrapperCol:{span:12}
+      labelCol:{span:9},
+      wrapperCol:{span:14}
     }
     const [imagesList,setImageList] = useState([])
     const [floorplansList,setFloorplansList] = useState([])
+    const [initData,setInitData] = useState({})
     const [floorplansError,setFloorplansError] =useState({status:"",help:houseSchema.floorplans.sizeText})
     const [imagesError,setImagesError] =useState({status:"",help:houseSchema.images.sizeText})
-    const {getFieldDecorator,validateFields} = props.form;
+    const {getFieldDecorator,validateFields,resetFields} = props.form;
     const uploadConfig = {
           listType: 'picture',
     }
@@ -73,6 +75,9 @@ function HouseEdit(props){
           setImageList(pre=>pre.filter(_=>_.url !==item.url))
       }
     }
+    const handleReset=()=>{
+        resetFields();
+    }
     const handleSubmit =()=>{
         validateFields({first:true},(error,values)=>{
             if(error){
@@ -93,6 +98,33 @@ function HouseEdit(props){
             props.onFetchFormData(values);
         })
     }
+    //原始数据
+    useEffect(()=>{
+      let initData = props.initData? props.initData:{}
+      setInitData(initData)
+      //设置图片数据
+      if(Array.isArray(initData.images)){
+            let initImageList =initData.images.map(url=>{
+                return {
+                  uid:url,
+                  url:url,
+                  status:"done"
+                }
+            })
+            setImageList(initImageList)
+      }
+      if(Array.isArray(initData.floorplans)){
+            let initFloorplans =initData.floorplans.map(url=>{
+              return {
+                uid:url,
+                url:url,
+                status:"done"
+              }
+            })
+            setFloorplansList(initFloorplans)
+      }
+    },[props.initData])
+    
     return (
         <div>
           <Form {...forItemLayout} labelAlign="left">
@@ -102,6 +134,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.name.label} >
                         {
                             getFieldDecorator("name",{
+                              initialValue:initData.name||"",
                               rules:[
                                   {required:true,message:houseSchema.name.emptyText},
                                   {min:houseSchema.name.min,max:houseSchema.name.max,message:houseSchema.name.sizeText},
@@ -118,7 +151,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.tradeType.label}>
                         {
                             getFieldDecorator("tradeType",{
-                              initialValue:"",
+                              initialValue:initData.tradeType,
                               rules:[
                                   {required:true,message:houseSchema.tradeType.emptyText},
                               ],
@@ -140,7 +173,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.location.label} >
                         {
                               getFieldDecorator("location",{
-                                initialValue:[],
+                                initialValue:initData.location||[],
                                 rules:[
                                     {required:true,message:houseSchema.location.emptyText},
                                 ],
@@ -156,7 +189,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.address.label}>
                         {
                               getFieldDecorator("address",{
-                                initialValue:"",
+                                initialValue:initData.address||"",
                                 rules:[
                                     {required:true,message:houseSchema.address.emptyText},
                                     {min:houseSchema.address.min,max:houseSchema.address.max,message:houseSchema.address.sizeText},
@@ -172,7 +205,7 @@ function HouseEdit(props){
                       <Form.Item label= {houseSchema.price.label}>
                           {
                               getFieldDecorator("price",{
-                                initialValue:"",
+                                initialValue:initData.price,
                                 rules:[
                                     {required:true,message:houseSchema.price.emptyText},
                                 ],
@@ -188,7 +221,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.area.label} >
                         {
                               getFieldDecorator("area",{
-                                initialValue:"",
+                                initialValue:initData.area,
                                 rules:[
                                     {required:true,message:houseSchema.area.emptyText},
                                 ],
@@ -204,7 +237,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.beds.label} >
                           {
                               getFieldDecorator("beds",{
-                                initialValue:"",
+                                initialValue:initData.beds,
                                 rules:[
                                     {required:true,message:houseSchema.beds.emptyText},
                                 ],
@@ -219,7 +252,7 @@ function HouseEdit(props){
                       <Form.Item label={houseSchema.baths.label} >
                           {
                               getFieldDecorator("baths",{
-                                initialValue:"",
+                                initialValue:initData.baths,
                                 rules:[
                                     {required:true,message:houseSchema.baths.emptyText},
                                 ],
@@ -236,7 +269,7 @@ function HouseEdit(props){
                   <Form.Item wrapperCol={{span:24}}>
                       {
                         getFieldDecorator("properties",{
-                            initialValue:[],
+                            initialValue:initData.properties||[],
                             rules:[
                               {required:true,message:houseSchema.properties.emptyText},
                             ],
@@ -253,7 +286,7 @@ function HouseEdit(props){
                   <Form.Item label={houseSchema.remarks.label} labelCol={{span:2}} wrapperCol={{span:18}}>
                     {
                         getFieldDecorator("remarks",{
-                            initialValue:"",
+                            initialValue:initData.remarks||"",
                         })(
                           <Input.TextArea rows={4} />
                         )
@@ -300,7 +333,12 @@ function HouseEdit(props){
           </Form>
           <Row type="flex" justify="end" style={{marginTop:30}}>
             <Button style={{marginRight:30}} type="primary" onClick={handleSubmit}>保存</Button>
-            <Button>取消</Button>
+            {
+              props.onCancel !==undefined?
+              <Button onClick={props.onCancel}>取消</Button>
+              : <Button onClick={handleReset}>重置</Button>
+            }
+           
           </Row>
         </div>
     )

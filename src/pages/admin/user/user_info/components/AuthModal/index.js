@@ -12,6 +12,7 @@ import { NORMAL_CUSTOMER,HOSUE_AGENT } from '../../../../../../consts/index';
 import {location_config} from "@src/config/location"
 import ImgUpload from "@src/components/ImgUpload"
 import userAuthSchema from "@src/schema/userAuthSchema"
+import {transTypeFromList} from "@src/utils/formatUtil"
 function AuthModal(props){
     const [isShowAgency,setIsShowAgency] = useState(false)
     const handleOk=()=>{
@@ -47,13 +48,7 @@ function AuthModal(props){
     const {getFieldDecorator} =props.form;
     const {authInfo} = props;
     const {provinceId,cityId,countyId} = authInfo && authInfo.location?authInfo.location:{}
-    const initLocation = [provinceId,cityId,countyId].map(_=>{
-        if(_ !==undefined){
-          return new String(_).toString();
-        }else{
-          return _
-        }
-    })
+    const initLocation = transTypeFromList([provinceId,cityId,countyId],"string")
     return (
             <Modal
                 title="个人信息"

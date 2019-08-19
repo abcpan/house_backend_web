@@ -4,6 +4,7 @@ import {menuList} from "./menuList.js"
 import {NavLink} from "react-router-dom"
 import styles from "./index.scss"
 const {SubMenu} = Menu 
+
 export default function LeftNav(props){
     const renderMenu=(menuList)=>{
           return menuList.map(item=>{
@@ -29,9 +30,8 @@ export default function LeftNav(props){
           </div>
           <Menu
             theme={"this.state.theme"}
-            //onClick={this.handleClick}
             style={{ width:"100%"}}
-            //selectedKeys={[this.state.current]}
+            defaultSelectedKeys={["/admin/home"]}
             mode="inline"
             theme="dark"
           >

@@ -2,10 +2,7 @@
 @import "~@src/style/var.scss";
 .header{
    height:10vh;
-   background:$white-color;
-   padding:0 30px;
    @extend .clear_fix;
-   border-bottom:1px solid $border-color;
    position: relative;
    &_info{
       position: absolute;
