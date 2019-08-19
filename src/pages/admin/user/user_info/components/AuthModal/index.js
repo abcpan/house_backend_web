@@ -5,7 +5,8 @@ import {Modal,
   Cascader
 } from 'antd';
 import React,{
-  useState
+  useState,
+  useEffect
 } from "react"
 import styles from "./index.scss"
 import { NORMAL_CUSTOMER,HOSUE_AGENT } from '../../../../../../consts/index';
