@@ -11,9 +11,11 @@ export const ACTION_SET_IS_RESET_PASSWD = "SET_IS_RESET_PASSWD"
 export const ACTION_SET_IS_CHANGE_PASSWD = "SET_IS_CHANGE_PASSWD"
 //将登录状态清空
 export function resetLoginStatus(){
+  userService.handleLogout();
   return {
       type:ACTION_SET_IS_LOGOUT
   }
+  
 }
 //同步更新信息
 function getUserInfoSync(info){
