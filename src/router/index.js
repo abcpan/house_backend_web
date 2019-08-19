@@ -51,11 +51,12 @@ export default function(){
                     <Route path="/admin/house/detail" component={HouseDetail}/>
                     <Route path="/admin/house/analyse" component={HouseAnalyse}/>
                     <Route path="/admin/house/result" component={HouseResult}/>
+                    <Redirect to="/admin/home" />
                   </Switch>
               </AdminLayout> 
           }>
           </Route>
-          <Route component={Login}/>
+          <Redirect to="/user/login" />
         </Switch>
     </App>
     </Router>
