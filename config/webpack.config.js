@@ -210,8 +210,7 @@ module.exports = function(webpackEnv) {
                 }
               : false,
           },
-        }),
-        new UglifyJsPlugin()
+        })
       ],
       splitChunks: {
         chunks: 'all',
