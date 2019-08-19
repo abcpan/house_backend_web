@@ -25,7 +25,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const postcssNormalize = require('postcss-normalize');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -211,10 +211,12 @@ module.exports = function(webpackEnv) {
               : false,
           },
         }),
+        new UglifyJsPlugin()
       ],
       splitChunks: {
         chunks: 'all',
         name: false,
+        automaticNameDelimiter:"~"
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
