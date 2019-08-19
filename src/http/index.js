@@ -75,7 +75,7 @@ class HTTP{
     message.info(msg,DURATION)
     setTimeout(()=>{
       userService.handleLogout();
-    },2000);
+    },1000);
   }
 }
 

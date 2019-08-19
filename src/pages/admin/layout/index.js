@@ -17,9 +17,7 @@ function AdminLayout (props){
                 <SideHeader/>
               </Header>
               <Content className={styles.content_layout}>
-                  {
-                    props.isLogin?props.children:<Redirect to="/user/login"/>
-                  }
+                  {props.children}
               </Content>
             </Layout>
           </Layout>

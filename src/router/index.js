@@ -1,7 +1,7 @@
 import React from "react"
 import App from "@src/App"
 import Register from "@src/pages/account/register"
-import {HashRouter as Router,Route,Switch,Redirect} from "react-router-dom"
+import {HashRouter,Route,Switch,Redirect} from "react-router-dom"
 import SendEmail from '@src/pages/account/send_email/index';
 import Login from '@src/pages/account/login/index';
 import VerifyEmail from '@src/pages/account/verify_email/index';
@@ -21,7 +21,7 @@ import HouseAnalyse from './../pages/admin/house/house_analyse/index';
 import HouseResult from "@src/pages/admin/house/house_result"
 export default function(){
     return (
-    <Router>
+    <HashRouter>
       <App>
         <Switch>
           <Route path="/user" render={()=>
@@ -32,7 +32,6 @@ export default function(){
                   <Route path="/user/apply_passwd" component={ApplyPasswd}/>
                   <Route path="/user/change_passwd" component={ChangePasswd}/>
                   <Route path="/user/reset_passwd" component={ResetPasswd}/>
-                  <Redirect to="/user/login" />
                 </Switch>
               </LoginLayout>
             }
@@ -59,7 +58,7 @@ export default function(){
           <Redirect to="/user/login" />
         </Switch>
     </App>
-    </Router>
+    </HashRouter>
         
     )
 }
