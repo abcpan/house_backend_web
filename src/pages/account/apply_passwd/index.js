@@ -1,14 +1,14 @@
-import React,{useCallback} from 'react'
+import React from 'react'
 import {
   Form,
   Button,
   Input,
 } from "antd"
 import styles from "./index.scss"
-import formReg from "@src/utils/regexp"
 import {connect} from "react-redux"
 import {Redirect} from "react-router-dom"
 import {applyResetPasswd} from "@src/redux/user/actions"
+import userBaseSchema  from '@src/schema/userBaseSchema.js';
 function ApplyPasswd(props){
         const handleSubmit=()=>{
             props.form.validateFields({first:true},(error,values)=>{
@@ -34,12 +34,12 @@ function ApplyPasswd(props){
                         {
                           getFieldDecorator("email",{
                             rules:[
-                              {required: true,message: formReg.email.emptyText},
-                              {pattern:formReg.email.reg,message: formReg.email.errorText},
+                              {required: true,message: userBaseSchema.email.emptyText},
+                              {pattern:userBaseSchema.email.reg,message: userBaseSchema.email.errorText},
                             ],
                             validateTrigger:"onSubmit"
                         })(
-                            <Input placeholder={formReg.email.emptyText} />
+                            <Input placeholder={userBaseSchema.email.emptyText} />
                           )
                         }
                       </Form.Item>

@@ -5,10 +5,10 @@ import {
   Input,
 } from "antd"
 import styles from "./index.scss"
-import formReg from "@src/utils/regexp"
 import {connect} from "react-redux"
-import {login,resetLoginStatus} from "@src/redux/user/actions"
+import {login} from "@src/redux/user/actions"
 import {Redirect} from "react-router-dom"
+import  userBaseSchema from '@src/schema/userBaseSchema.js';
 function Login(props){
     const handleSubmit=()=>{
       props.form.validateFields({first:true},async (error,values)=>{
@@ -36,23 +36,23 @@ function Login(props){
                 {
                   getFieldDecorator("name",{
                     rules:[
-                      {required: true,message: formReg.name.emptyText},
-                      {min:formReg.name.min,max:formReg.name.max,message: formReg.name.sizeText},
-                      {pattern:formReg.name.reg,message: formReg.name.errorText}
+                      {required: true,message: userBaseSchema.name.emptyText},
+                      {min:userBaseSchema.name.min,max:userBaseSchema.name.max,message: userBaseSchema.name.sizeText},
+                      {pattern:userBaseSchema.name.reg,message: userBaseSchema.name.errorText}
                     ],
                     validateTrigger:"onSubmit"
                   }
                   )(
-                    <Input placeholder={formReg.name.emptyText} />
+                    <Input placeholder={userBaseSchema.name.emptyText} />
                   )
                 }
               </Form.Item>
               <Form.Item label="密码"  colon={false}>
                 {
                   getFieldDecorator("passwd",{rules:[
-                    {required: true,message:formReg.passwd.emptyText},
+                    {required: true,message:userBaseSchema.passwd.emptyText},
                   ]})(
-                    <Input.Password placeholder={formReg.passwd.emptyText}/>
+                    <Input.Password placeholder={userBaseSchema.passwd.emptyText}/>
                   )
                 }
               </Form.Item>

@@ -1,18 +1,9 @@
-import {Modal,Form,Input,Radio} from 'antd';
+import {Modal} from 'antd';
 import React from "react"
 import styles from "./index.scss"
-import formReg from '@src/utils/regexp';
 function EmailModal(props){
     const handleOk=()=>{
           props.handleOk();
-    }
-    const formItemLayout={
-      labelCol: {
-        span: 8
-      },
-      wrapperCol: {
-        span: 16
-      }
     }
     return (
         <div className={styles.modal}>

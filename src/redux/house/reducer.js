@@ -7,7 +7,6 @@ import {
   ACTION_SET_ON_HOSUE,
   ACTION_SET_HOUSE_DETAIL   //房产详情
 } from './actions';
-import houseSchema from '@src/schema/houseSchema';
 import {OFF_SALE,ON_SALE} from "@src/consts/index"
 const initState={
     isLoading:false,

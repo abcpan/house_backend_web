@@ -1,8 +1,4 @@
-import React,
-{
-  useEffect
-}
-from "react"
+import React from "react"
 import {
   Modal,
   Descriptions,
@@ -10,7 +6,6 @@ import {
   Divider
 }from "antd"
 import {getHouseDetailView} from "@src/viewConvertion"
-import { ImgUpload } from '@src/components/ImgUpload';
 import styles from "./index.scss"
 const {Item} = Descriptions;
 function HouseDetail(props){

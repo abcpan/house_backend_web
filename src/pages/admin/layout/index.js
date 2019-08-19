@@ -3,13 +3,9 @@ import {connect} from "react-redux"
 import {Redirect} from "react-router-dom"
 import LeftNav from "./components/LeftNav"
 import SideHeader from "./components/Header"
-import {
-  Row,
-  Col,
-  Layout
-} from "antd"
+import {Layout} from "antd"
 import styles from "./index.scss";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content,Sider } = Layout;
 function AdminLayout (props){
     return (
           <Layout className={styles.layout}>

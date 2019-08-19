@@ -5,10 +5,10 @@ import {
   Input
 } from "antd"
 import styles from "./index.scss"
-import formReg from "@src/utils/regexp"
 import {register} from "@src/redux/user/actions"
 import {connect} from "react-redux"
 import {Redirect} from "react-router-dom"
+import userBaseSchema  from '@src/schema/userBaseSchema.js';
 function Register(props){
     const handleSubmit=()=>{
       props.form.validateFields({first:true},async (error,values)=>{
@@ -19,7 +19,7 @@ function Register(props){
               props.form.setFields({
                 confirmPasswd:{
                     value:values.confirmPasswd,
-                    errors:[new Error(formReg.confirmPasswd.isNotSameText)]
+                    errors:[new Error(userBaseSchema.confirmPasswd.isNotSameText)]
                 }
               })
               return;
@@ -46,13 +46,13 @@ function Register(props){
                   {
                     getFieldDecorator("name",{
                       rules:[
-                        {required: true,message:formReg.name.emptyText},
-                        {min:formReg.name.min,max:formReg.name.max,message:formReg.name.sizeText},
-                        {pattern: formReg.name.reg,message:formReg.name.errorText},
+                        {required: true,message:userBaseSchema.name.emptyText},
+                        {min:userBaseSchema.name.min,max:userBaseSchema.name.max,message:userBaseSchema.name.sizeText},
+                        {pattern: userBaseSchema.name.reg,message:userBaseSchema.name.errorText},
                       ],
                       validateTrigger:"onSubmit"
                       })(
-                      <Input placeholder={formReg.name.emptyText}/>
+                      <Input placeholder={userBaseSchema.name.emptyText}/>
                     )
                   }
                     
@@ -61,12 +61,12 @@ function Register(props){
                   {
                     getFieldDecorator("mobile",{
                       rules:[
-                        {required: true,message: formReg.mobile.emptyText},
-                        {pattern: formReg.mobile.reg,message: formReg.mobile.errorText},
+                        {required: true,message: userBaseSchema.mobile.emptyText},
+                        {pattern: userBaseSchema.mobile.reg,message: userBaseSchema.mobile.errorText},
                       ],
                       validateTrigger:"onSubmit"
                   })(
-                      <Input placeholder={formReg.mobile.emptyText} maxLength={11}/>
+                      <Input placeholder={userBaseSchema.mobile.emptyText} maxLength={11}/>
                     )
                   }
                 </Form.Item>
@@ -74,12 +74,12 @@ function Register(props){
                   {
                     getFieldDecorator("email",{
                       rules:[
-                        {required: true,message: formReg.email.emptyText},
-                        {pattern: formReg.email.reg,message: formReg.email.errorText},
+                        {required: true,message: userBaseSchema.email.emptyText},
+                        {pattern: userBaseSchema.email.reg,message: userBaseSchema.email.errorText},
                       ],
                       validateTrigger:"onSubmit"
                   })(
-                      <Input placeholder={formReg.email.emptyText} />
+                      <Input placeholder={userBaseSchema.email.emptyText} />
                     )
                   }
                 </Form.Item>
@@ -87,12 +87,12 @@ function Register(props){
                   {
                     getFieldDecorator("passwd",{
                       rules:[
-                        {required: true,message: formReg.passwd.emptyText},
-                        {min:formReg.passwd.min,max:formReg.passwd.max,message: formReg.passwd.sizeText},
+                        {required: true,message: userBaseSchema.passwd.emptyText},
+                        {min:userBaseSchema.passwd.min,max:userBaseSchema.passwd.max,message: userBaseSchema.passwd.sizeText},
                     ],
                     validateTrigger:"onSubmit"
                   })(
-                      <Input.Password placeholder={formReg.passwd.emptyText} maxLength={16}/>
+                      <Input.Password placeholder={userBaseSchema.passwd.emptyText} maxLength={16}/>
                     )
                   }
                 </Form.Item>
@@ -100,13 +100,13 @@ function Register(props){
                   {
                     getFieldDecorator("confirmPasswd",{
                         rules:[
-                          {required: true,message:formReg.confirmPasswd.emptyText},
-                          {min:formReg.confirmPasswd.min,max:formReg.confirmPasswd.max,message:formReg.confirmPasswd.sizeText}
+                          {required: true,message:userBaseSchema.confirmPasswd.emptyText},
+                          {min:userBaseSchema.confirmPasswd.min,max:userBaseSchema.confirmPasswd.max,message:userBaseSchema.confirmPasswd.sizeText}
                         ],
                         validateTrigger:"onSubmit"
                       }
                       )(
-                      <Input.Password placeholder={formReg.confirmPasswd.emptyText} />
+                      <Input.Password placeholder={userBaseSchema.confirmPasswd.emptyText} />
                     )
                     }
                 </Form.Item>

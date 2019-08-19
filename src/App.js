@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import { connect } from 'react-redux';
-import {Redirect,withRouter} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 import SessionStorage from './storage/sessionStorage';
 import {recoverState} from "@src/redux/action"
 function App(props) {

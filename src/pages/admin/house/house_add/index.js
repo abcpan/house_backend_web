@@ -1,7 +1,4 @@
-import React,{
-  useState
-}
-from "react"
+import React from "react"
 import styles from "./index.scss"
 import HosueForm from "../components/HouseForm"
 import houseService from "@src/service/houseService"

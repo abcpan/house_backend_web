@@ -2,7 +2,6 @@ import {
   Descriptions,
   Button,
   Row,
-  Empty
 } from 'antd';
 import {connect} from "react-redux"
 import React,{useState}from "react"

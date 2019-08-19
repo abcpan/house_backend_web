@@ -1,14 +1,14 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import {
   Form,
   Button,
   Input,
 } from "antd"
 import styles from "./index.scss"
-import formReg from "@src/utils/regexp"
 import {connect} from "react-redux"
 import {Redirect} from "react-router-dom"
 import {changePasswd} from "@src/redux/user/actions"
+import userBaseSchema from '@src/schema/userBaseSchema.js';
 function ChangePasswd(props){
     const handleSubmit=()=>{
       props.form.validateFields({first:true},(error,values)=>{
@@ -19,7 +19,7 @@ function ChangePasswd(props){
               props.form.setFields({
                 confirmPasswd:{
                     value:values.confirmPasswd,
-                    errors:[new Error(formReg.confirmPasswd.isNotSameText)]
+                    errors:[new Error(userBaseSchema.confirmPasswd.isNotSameText)]
                 }
               })
               return;
@@ -42,12 +42,12 @@ function ChangePasswd(props){
                     {
                       getFieldDecorator("currentPasswd",{
                         rules:[
-                          {required: true,message: formReg.passwd.emptyText},
-                          {min: formReg.passwd.min,max:formReg.passwd.max,message:formReg.passwd.sizeText},
+                          {required: true,message: userBaseSchema.passwd.emptyText},
+                          {min: userBaseSchema.passwd.min,max:userBaseSchema.passwd.max,message:userBaseSchema.passwd.sizeText},
                         ],
                         validateTrigger:"onSubmit"
                       })(
-                      <Input.Password placeholder={formReg.passwd.emptyText} />
+                      <Input.Password placeholder={userBaseSchema.passwd.emptyText} />
                       )
                     }
                     </Form.Item>
@@ -55,12 +55,12 @@ function ChangePasswd(props){
                     {
                       getFieldDecorator("passwd",{
                         rules:[
-                          {required: true,message: formReg.passwd.emptyText},
-                          {min: formReg.passwd.min,max:formReg.passwd.max,message:formReg.passwd.sizeText},
+                          {required: true,message: userBaseSchema.passwd.emptyText},
+                          {min: userBaseSchema.passwd.min,max:userBaseSchema.passwd.max,message:userBaseSchema.passwd.sizeText},
                         ],
                         validateTrigger:"onSubmit"
                       })(
-                      <Input.Password placeholder={formReg.passwd.emptyText} />
+                      <Input.Password placeholder={userBaseSchema.passwd.emptyText} />
                       )
                     }
                     </Form.Item>
@@ -68,12 +68,12 @@ function ChangePasswd(props){
                       {
                         getFieldDecorator("confirmPasswd",{
                           rules:[
-                            {required: true,message: formReg.passwd.emptyText},
-                            {min: formReg.confirmPasswd.min,max:formReg.confirmPasswd.max,message:formReg.confirmPasswd.sizeText},
+                            {required: true,message: userBaseSchema.passwd.emptyText},
+                            {min: userBaseSchema.confirmPasswd.min,max:userBaseSchema.confirmPasswd.max,message:userBaseSchema.confirmPasswd.sizeText},
                           ],
                           validateTrigger:"onSubmit"
                         })(
-                        <Input.Password placeholder={formReg.confirmPasswd.emptyText} />
+                        <Input.Password placeholder={userBaseSchema.confirmPasswd.emptyText} />
                         )
                       }
                   </Form.Item>

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React from "react"
 import {Result,Button} from "antd"
 import {connect} from "react-redux"
 function ResetResult(props){
