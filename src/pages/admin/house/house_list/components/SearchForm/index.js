@@ -42,7 +42,7 @@ function SearchForm(props){
                   </Col>
                   <Col span={6}>
                     <Form.Item label="价格排序">
-                        <Select defaultValue={houseSchema.priceSort.defaultValue}  onChange={(value)=>handleChange("sort",value)}>
+                        <Select  onChange={(value)=>handleChange("sort",value)}>
                           {
                               houseSchema.priceSort.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
@@ -53,23 +53,25 @@ function SearchForm(props){
                   </Col>
                   <Col span={6}>
                     <Form.Item label="交易类型">
-                        <Select defaultValue={houseSchema.tradeType.defaultValue} onChange={(value)=>handleChange("tradeType",value)}>
+                        <Select onChange={(value)=>handleChange("tradeType",value)}>
                             {
                               houseSchema.tradeType.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
                               ))
                             }
+                           <Option value={null} >{"全部"}</Option>
                         </Select>
                     </Form.Item>
                   </Col>
                   <Col span={6}>
                     <Form.Item label="售卖状态">
-                        <Select defaultValue={houseSchema.state.defaultValue} style={{ width: 120 }} onChange={(value)=>handleChange("state",value)}>
+                        <Select style={{ width: 120 }} onChange={(value)=>handleChange("state",value)}>
                             {
                               houseSchema.state.options.map(_=>(
                                 <Option value={_.value} key={_.label}>{_.label}</Option>
                               ))
                             }
+                            <Option value={null} >{"全部"}</Option>
                         </Select>
                     </Form.Item>
                   </Col>

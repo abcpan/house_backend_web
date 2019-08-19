@@ -1,3 +1,6 @@
+/**
+ * 没有index 的不参与显示 或者另外需要进行处理
+ */
 module.exports={
     name:{
         label:"房屋标题",
@@ -13,7 +16,6 @@ module.exports={
         options:[
           {label:"出租",value:2},
           {label:"出售",value:1},
-          {label:"全部",value:null},
         ],
         defaultValue:1,
         index:2
@@ -118,16 +120,24 @@ module.exports={
         options:[
             {label:"待交易",value:1},
             {label:"下架",value:2},
-            {label:"全部",value:null}
         ],
-        defaultValue:1
+        defaultValue:1,
+        index:15
     },
     priceSort:{
-      label:"价格",
+      label:"价格排序",
       options:[
         {label:"从高到底",value:"price_desc"},
         {label:"从低到高",value:"price_asc"},
       ],
       defaultValue:"price_asc"
+    },
+    createTime:{
+      label:"创建时间",
+      index:16
+    },
+    updateTime:{
+      label:"更新时间",
+      index:17
     }
 }

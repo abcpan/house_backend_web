@@ -59,3 +59,19 @@ export const  addHouse=(params)=>{
 export const getHouseList=(params)=>{
   return http.post("backend/houses/house_list",params);
 }
+//删除
+export const deleteHouse=(params)=>{
+  return http.post("backend/houses/house_del",params)
+}
+//下架房产
+export const offHouse=(params)=>{
+  return http.post("backend/houses/house_off",params)
+}
+//上架房产
+export const onHouse=(params)=>{
+  return http.post("backend/houses/house_on",params)
+}
+export const getHouseDetail=(params)=>{
+  return http.post("backend/houses/house_detail",params)
+}
+

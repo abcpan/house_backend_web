@@ -3,11 +3,17 @@ import userAuthSchema from "@src/schema/userAuthSchema.js"
 import houseSchema  from '@src/schema/houseSchema';
 //转换函数
 function getViewList(info,config){
+    if(typeof info !=="object" || !config ||Object.keys(info).length ===0){
+        return []
+    }
     const map = new Map(Object.entries(config))
     let viewList = []
     for(const [key,value] of Object.entries(info)){
         if(!map.has(key)){
             continue;
+        }
+        if(typeof value !=="string" && typeof value !=="number"){
+          continue;
         }
         const viewOrigin = map.get(key);
         //如果选项存在
@@ -15,12 +21,14 @@ function getViewList(info,config){
               let option = viewOrigin.options.find(_=>_.value===value)
               viewList.push({
                 label:viewOrigin.label,
-                value:option? option.label :value
+                value:option? option.label :value,
+                index:viewOrigin.index
               })
         }else{
           viewList.push({
             label:viewOrigin.label,
-            value:value
+            value:value,
+            index:viewOrigin.index
           })
         }
         
@@ -28,7 +36,7 @@ function getViewList(info,config){
     return viewList;
 }
 function sortLabel(viewList){
-  viewList.sort((a,b)=>a.index-b.indes)
+  viewList.sort((a,b)=>a.index-b.index)
 }
 //排序处理
 export function getUserBaseInfoView(info,config=userBaseSchema){
@@ -54,5 +62,40 @@ export function getUserAuthInfoView(info,config=userAuthSchema){
         value:locationStr
     })
     return newViewList
+}
+
+export function getHouseDetailView(info,config=houseSchema){
+    if(typeof info !=="object" || Object.keys(info).length ===0){
+        return {}
+    }
+    let viewList = getViewList(info,config);
+    //组装地址
+    let {location,images,properties,floorplans} = info;
+    let {provinceName,cityName,countyName} = location
+    let position = [provinceName,cityName,countyName].join("-")
+    viewList.push({
+        label:config["location"].label,
+        value:position,
+        index:config["location"].index
+    })
+    //组装属性
+    let props = properties.map(_=>{
+        let option = config["properties"].options.find(item=>item.value == _)
+        if(option){
+          return option.label;
+        }
+    })
+    //弄成字符串
+    viewList.push({
+        label: config["properties"].label,
+        value:props.join("-"),
+        index: config["properties"].index
+    })
+    sortLabel(viewList)
+    return {
+      list:viewList,
+      images,
+      floorplans
+    }
 }
 
