@@ -31,6 +31,11 @@ function AuthModal(props){
           setIsShowAgency(true);
       }
     }
+    useEffect(() => {
+        if(props.authInfo && props.authInfo.userType === HOSUE_AGENT){
+          setIsShowAgency(true);
+        }
+    }, [])
     const handleUpload=async (imgURL)=>{
           props.form.setFieldsValue({
             avatar:imgURL
