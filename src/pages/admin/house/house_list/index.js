@@ -1,6 +1,8 @@
 import React,{
   useEffect,
   useState,
+  lazy,
+  Suspense,
 }
 from "react"
 import {connect} from "react-redux"
@@ -8,7 +10,8 @@ import styles from "./index.scss"
 import {
   List, 
   Avatar,
-  Popconfirm
+  Popconfirm,
+  Spin
 }from "antd"
 import {
   getHosuePageAsync,
@@ -20,10 +23,10 @@ import {
 } from "@src/redux/house/actions"
 import houseSchema  from '@src/schema/houseSchema';
 import {findLabel,findLabelList} from "@src/utils/formatUtil"
-import SearchForm from "./components/SearchForm"
 import { ON_SALE,OFF_SALE } from './../../../../consts/index';
-import HouseDetailModal from "./components/DetailModal"
-import HouseEditModal from "./components/EditModal"
+const SearchForm=lazy(()=>import(/**webpackChunkName:"SearchForm" */"./components/SearchForm"))
+const HouseDetailModal = lazy(()=>import(/*webpackChunkName:"houseDetailModal" */"./components/DetailModal"))
+const HouseEditModal = lazy(()=>import(/*webpackChunkName:"HouseEditModal" */"./components/EditModal"))
 const DELETE="delete";
 const EDIT ="edit"
 const SALE = "sale"
@@ -87,10 +90,13 @@ function HouseList(props){
     }
     return (
         <div>
-            <SearchForm
-                onChange={handleChange}
-                params={params}
-            />
+            <Suspense fallback={<Spin/>}>
+              <SearchForm
+                  onChange={handleChange}
+                  params={params}
+              />
+            </Suspense>
+           
             <List
               className={styles.list}
               loading={isLoading}
@@ -153,18 +159,23 @@ function HouseList(props){
                 
               }
             />
-            <HouseDetailModal
-              visible={isShowDetail}
-              handleOk={()=>setIsShowDetail(pre=>!pre)}
-              handleCancel={()=>setIsShowDetail(pre=>!pre)}
-              info ={currentHosue}
-            />
-            <HouseEditModal
-              visible={isShowHouseEditModal}
-              handleOk={handleUpdateHouse}
-              handleCancel={()=>setIsShowHouseEditModal(pre=>!pre)}
-              info={currentHosue}
-            />
+            <Suspense fallback={<Spin/>}>
+              <HouseDetailModal
+                visible={isShowDetail}
+                handleOk={()=>setIsShowDetail(pre=>!pre)}
+                handleCancel={()=>setIsShowDetail(pre=>!pre)}
+                info ={currentHosue}
+              />
+            </Suspense>
+            <Suspense fallback={<Spin/>}>
+                <HouseEditModal
+                  visible={isShowHouseEditModal}
+                  handleOk={handleUpdateHouse}
+                  handleCancel={()=>setIsShowHouseEditModal(pre=>!pre)}
+                  info={currentHosue}
+                />
+            </Suspense>
+            
         </div>
     )
 }

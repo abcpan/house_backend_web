@@ -2,19 +2,25 @@ import {
   Descriptions,
   Button,
   Row,
+  Spin
 } from 'antd';
 import {connect} from "react-redux"
-import React,{useState}from "react"
+import React,{
+  useState,
+  lazy,
+  Suspense,
+}from "react"
 import { getUserBaseInfoView,getUserAuthInfoView} from '@src/viewConvertion/index';
-import EditModal from "./components/EditModal/index"
-import EmailModal from "./components/EmailModal"
-import AuthModal from "./components/AuthModal"
 import {
   updateUserInfo,
   addAuth,
   updateAuthAsync
 } from "@src/redux/user/actions"
 import styles from './index.scss';
+
+const EditModal = lazy(()=>import(/*webpackChunkName:"userEditModal" */ "./components/EditModal/index"))
+const EmailModal = lazy(()=>import(/*webpackChunkName:"EmialModal" */ "./components/EmailModal/index"))
+const AuthModal = lazy(()=>import(/*webpackChunkName:"AuthModal" */ "./components/AuthModal/index"))
 const {Item} = Descriptions
 function Person(props){
      const [isShowBaseModal,setIsShowBaseModal] = useState(false)
@@ -103,24 +109,29 @@ function Person(props){
                         <Button type="primary" onClick={()=>handleClick("auth")}>{isAuth?"修改实名信息":"去实名认证"}</Button>
                 </Row>
             </div>
-            <EditModal 
-                visible={isShowBaseModal}
-                handleOk={(value)=>handleSubmit("base",value)}
-                handleCancel={()=>{setIsShowBaseModal(preState=>!preState)}}
-                userInfo={userInfo}
-            />
-            
-            <EmailModal
-               visible={isShowEmailModal}
-               handleOk={()=>handleSubmit("email")}
-               handleCancel={()=>{setIsShowEmailModal(preState=>!preState)}}
-            />
-            <AuthModal
-              visible={isShowAuthModal}
-              handleOk={(values)=>handleSubmit("auth",values)}
-              handleCancel={()=>{setIsShowAuthModal(pre=>!pre)}}
-              authInfo={userInfo.authInfo?userInfo.authInfo:{}}
-            />
+            <Suspense fallback={<Spin/>}>
+              <EditModal 
+                  visible={isShowBaseModal}
+                  handleOk={(value)=>handleSubmit("base",value)}
+                  handleCancel={()=>{setIsShowBaseModal(preState=>!preState)}}
+                  userInfo={userInfo}
+              />
+            </Suspense>
+            <Suspense fallback={<Spin/>}>
+              <EmailModal
+                visible={isShowEmailModal}
+                handleOk={()=>handleSubmit("email")}
+                handleCancel={()=>{setIsShowEmailModal(preState=>!preState)}}
+              />
+            </Suspense>
+            <Suspense fallback={<Spin/>}>
+                <AuthModal
+                  visible={isShowAuthModal}
+                  handleOk={(values)=>handleSubmit("auth",values)}
+                  handleCancel={()=>{setIsShowAuthModal(pre=>!pre)}}
+                  authInfo={userInfo.authInfo?userInfo.authInfo:{}}
+                />
+            </Suspense>
         </div>
         
     )
