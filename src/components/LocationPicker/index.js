@@ -1,17 +1,29 @@
-import React from "react"
+import React,{
+  useEffect
+ } from "react";
 import {
   Cascader 
 } from "antd"
-import { location_config } from './../../config/location';
+
 export default class LocationPicker extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+          locConfig:[]
+        }
+    }
+    async componentDidMount(){
+      const config = await import('./../../config/location')
+      let {location_config} = config
+      this.setState({
+        locConfig:location_config
+      })
     }
     render(){
       return (
         <Cascader
             {...this.props}
-            options={location_config}
+            options={this.state.locConfig}
             allowClear={true}
             notFoundContent="暂无相关数据"
         />

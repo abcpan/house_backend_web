@@ -10,12 +10,20 @@ import React,{
 } from "react"
 import styles from "./index.scss"
 import { NORMAL_CUSTOMER,HOSUE_AGENT } from '../../../../../../consts/index';
-import {location_config} from "@src/config/location"
 import ImgUpload from "@src/components/ImgUpload"
 import userAuthSchema from "@src/schema/userAuthSchema"
 import {transTypeFromList} from "@src/utils/formatUtil"
 function AuthModal(props){
     const [isShowAgency,setIsShowAgency] = useState(false)
+    const [locationConfig,setLocationConfig] = useState([])
+    useEffect(()=>{
+        const getLocationConfig=async()=>{
+          const config = await import("@src/config/location")
+          const {location_config} = config;
+          setLocationConfig(location_config)
+        }
+        getLocationConfig()
+    },[])
     const handleOk=()=>{
           props.form.validateFields({first:true},(error,value)=>{
                 if(error){
@@ -137,7 +145,7 @@ function AuthModal(props){
                           validateTrigger:"onSubmit"
                         }
 
-                        )(<Cascader options={location_config} allowClear={true} placeholder={userAuthSchema.location.emptyText}/>)
+                        )(<Cascader options={locationConfig} allowClear={true} placeholder={userAuthSchema.location.emptyText}/>)
                       }
                 </Form.Item>
                 <Form.Item label="头像上传">
