@@ -20,6 +20,13 @@ class UserService extends Service{
       SessionStorage.deleteData("token");
       SessionStorage.deleteData("state");
     }
+    get isLogin(){
+          let state = SessionStorage.getData("state");
+          if(state){
+               return state.user.isLogin;
+          }
+          return false;
+    }
     async register(params){
          let result;
           try{

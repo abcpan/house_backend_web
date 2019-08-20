@@ -121,12 +121,12 @@ module.exports = function(webpackEnv) {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvDevelopment,
-    //isEnvProduction
-      // ? shouldUseSourceMap
-      //   ? 'source-map'
-      //   : false
-      // : isEnvDevelopment && 'cheap-module-source-map',
+    devtool: 
+    isEnvProduction
+      ? shouldUseSourceMap
+        ? 'source-map'
+        : false
+      : isEnvDevelopment && 'cheap-module-source-map',
     entry: [
       isEnvDevelopment &&
         require.resolve('react-dev-utils/webpackHotDevClient'),
@@ -543,7 +543,6 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
-        new UglifyJsPlugin()
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.

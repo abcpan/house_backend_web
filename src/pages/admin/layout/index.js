@@ -5,6 +5,7 @@ import LeftNav from "./components/LeftNav"
 import SideHeader from "./components/Header"
 import {Layout} from "antd"
 import styles from "./index.scss";
+import userService from '@src/service/userService';
 const { Header, Content,Sider } = Layout;
 function AdminLayout (props){
     return (
@@ -17,7 +18,9 @@ function AdminLayout (props){
                 <SideHeader/>
               </Header>
               <Content className={styles.content_layout}>
-                  {props.children}
+                  {
+                    userService.isLogin?props.children:<Redirect to="/user/login"/>
+                  }
               </Content>
             </Layout>
           </Layout>
