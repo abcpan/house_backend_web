@@ -7,8 +7,8 @@ import {
 import styles from "./index.scss"
 import {connect} from "react-redux"
 import {login} from "@src/redux/user/actions"
-import {Redirect} from "react-router-dom"
 import  userBaseSchema from '@src/schema/userBaseSchema.js';
+import userService from "@src/service/userService"
 function Login(props){
     const handleSubmit=()=>{
       props.form.validateFields({first:true},async (error,values)=>{
@@ -19,16 +19,13 @@ function Login(props){
       })
     }
     const handleRegister=()=>{
-          props.history.push("/user/register")
+          userService.routeToRegister();
     }
     const handleRoute=()=>{
-          props.history.push("/user/apply_passwd")
+          userService.routeToApplyPasswd();
     }
     const { getFieldDecorator } = props.form;
-    return props.isLogin?
-          <Redirect to="/admin/home"/>
-        :
-        (
+    return (
           <div className={styles.form_wrap}>
               <h2 className={styles.form_title}>用户登录</h2> 
               <Form labelCol={{span:6}} wrapperCol={{ span:18}}>
@@ -67,9 +64,4 @@ function Login(props){
           </div>
  )
 }
-function mapStateFromProps(state){
-    return {
-        isLogin:state.user.isLogin
-    }
-}
-export default connect(mapStateFromProps,{login})(Form.create()(Login));
+export default connect(null,{login})(Form.create()(Login));

@@ -14,6 +14,7 @@ import {
 import {SUCCESS_CODE} from "@src/consts/code"
 import SessionStorage from './../storage/sessionStorage';
 import Service from "./service"
+import history from "@src/history"
 class UserService extends Service{
     
     removeLoginStatus(){
@@ -73,7 +74,7 @@ class UserService extends Service{
     handleLogout(){
           try{
             this.removeLoginStatus();
-            window.location.href = "/"
+            this.routeToUserLogin();
           }catch(error){
               console.log(error)
           }
@@ -201,7 +202,27 @@ class UserService extends Service{
         }
         return isDone;
     }
-   
+  /**
+   * 
+   */
+  routeToAdminHome(){
+    history.push("/admin/home")
+  }
+  routeToSendEmail(){
+    history.push("/send_email")
+  }
+  routeToPasswdResult(){
+    history.push("/passwd_result")
+  }
+  routeToUserLogin(){
+    history.push("/user/login");
+  }
+  routeToRegister(){
+    history.push("/user/register")
+  }
+  routeToApplyPasswd(){
+    history.push("/user/apply_passwd")
+  }
 }
 
 export default new UserService();

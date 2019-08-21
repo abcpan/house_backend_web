@@ -32,9 +32,7 @@ function ChangePasswd(props){
              props.form.resetFields();
         }
         const { getFieldDecorator } = props.form;
-        return props.isChangePasswd?
-              <Redirect to="/passwd_result"/>
-              :(
+        return (
                 <div className={styles.form_wrap}>
                   <h2 className={styles.form_title}>密码重置</h2> 
                   <Form labelCol={{span:6}} wrapperCol={{ span:18}}>
@@ -87,9 +85,5 @@ function ChangePasswd(props){
                 </div>
               )
 }
-function mapStateFromProps(state){
-    return {
-      isChangePasswd:state.user.isChangePasswd
-    }
-}
-export default connect(mapStateFromProps,{changePasswd})(Form.create()(ChangePasswd));
+
+export default connect(null,{changePasswd})(Form.create()(ChangePasswd));

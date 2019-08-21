@@ -23,10 +23,7 @@ function ApplyPasswd(props){
              props.form.resetFields();
         }
         const { getFieldDecorator } = props.form;
-        return props.isApplyResetPasswd?
-              <Redirect to="/send_email"/>
-              :
-                (
+        return (
                   <div className={styles.form_wrap}>
                       <h2 className={styles.form_title}>找回密码</h2> 
                       <Form labelCol={{span:6}} wrapperCol={{ span:18}}>

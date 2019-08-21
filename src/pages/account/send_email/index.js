@@ -1,9 +1,10 @@
 import {Result,Button} from "antd" 
 import React from "react"
 import { connect } from 'react-redux';
+import history from "@src/history"
 function SendEmail(props){
        const handleBack=()=>{
-             props.history.goBack();
+            history.goBack();
        }
         return (
                 <div>

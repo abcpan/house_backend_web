@@ -1,5 +1,4 @@
 import userService from "@src/service/userService"
-
 export const ACTION_SET_IS_REGISTERED = "SET_IS_REGISTERED"
 export const ACTION_SET_VERIFY_SCUCESS = "SET_VERIFY_SCUCESS"
 export const ACTION_SET_VERIFY_FAIL = "SET_VERIFY_FAIL"
@@ -9,6 +8,7 @@ export const ACTION_SET_GET_USER_INFO = "SET_GET_USER_INFO"
 export const ACTION_SET_IS_APPLY_EMAIL = "SET_IS_APPLY_EMAIL"
 export const ACTION_SET_IS_RESET_PASSWD = "SET_IS_RESET_PASSWD"
 export const ACTION_SET_IS_CHANGE_PASSWD = "SET_IS_CHANGE_PASSWD"
+
 //将登录状态清空
 export function resetLoginStatus(){
   userService.removeLoginStatus();
@@ -34,6 +34,7 @@ export function register(form){
                         type:ACTION_SET_IS_REGISTERED,
                         payload:{message:result}
                     })
+                    userService.routeToSendEmail();
              }else{
               return Promise.resolve()
              }
@@ -70,6 +71,7 @@ export function login(form){
                 dispatch({
                     type:ACTION_SET_IS_LOGIN,
                 })
+                userService.routeToAdminHome();
             }else{
               return Promise.resolve()
             }
@@ -115,7 +117,7 @@ export function changePasswd(form){
         const isDone = await userService.handleChangePasswd(form);
         if(isDone){
               dispatch(resetLoginStatus())
-              dispatch({type:ACTION_SET_IS_CHANGE_PASSWD})
+              userService.routeToPasswdResult();
         }else{
             return Promise.resolve();
         }
@@ -131,6 +133,7 @@ export function applyResetPasswd(form){
               type:ACTION_SET_IS_APPLY_EMAIL,
               payload:{message:result}
           })
+          userService.routeToSendEmail();
        }
     }
 }
@@ -140,6 +143,7 @@ export function resetPasswd(params){
         const isDone = await userService.handleResetPasswd(params);
         if(isDone){
             dispatch({type:ACTION_SET_IS_RESET_PASSWD})
+            userService.routeToPasswdResult();
         }else{
             return Promise.resolve();
         }

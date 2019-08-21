@@ -1,9 +1,9 @@
 import React from "react"
 import {Result,Button} from "antd"
-import {connect} from "react-redux"
+import userService from "@src/service/userService"
 function ResetResult(props){
     const handleRoute=()=>{
-        props.history.push("/user/login")
+      userService.routeToUserLogin();
     }
     return (
       <div>
@@ -23,4 +23,4 @@ function ResetResult(props){
       
     )
 }
-export default connect(null)(ResetResult)
+export default ResetResult

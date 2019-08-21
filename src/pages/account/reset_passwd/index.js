@@ -6,7 +6,6 @@ import {
 } from "antd"
 import styles from "./index.scss"
 import {connect} from "react-redux"
-import {Redirect} from "react-router-dom"
 import {resetPasswd} from "@src/redux/user/actions"
 import {queryParser} from "@src/utils/formatUtil"
 import userBaseSchema  from '@src/schema/userBaseSchema.js';
@@ -39,9 +38,7 @@ function RestPasswd(props){
           props.form.resetFields();
     }
     const { getFieldDecorator } = props.form;
-        return props.isResetPasswd?
-              <Redirect to="/passwd_result"/>
-              :(
+        return (
                 <div className={styles.form_wrap}>
                   <h2 className={styles.form_title}>密码重置</h2> 
                   <Form labelCol={{span:6}} wrapperCol={{ span:18}}>
@@ -81,9 +78,5 @@ function RestPasswd(props){
                 </div>
               )
 }
-function mapStateFromProps(state){
-    return {
-        isResetPasswd:state.user.isResetPasswd
-    }
-}
-export default connect(mapStateFromProps,{resetPasswd})(Form.create()(RestPasswd));
+
+export default connect(null,{resetPasswd})(Form.create()(RestPasswd));

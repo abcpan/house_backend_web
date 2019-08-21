@@ -3,13 +3,14 @@ import React,{useEffect} from "react"
 import { connect } from 'react-redux';
 import {queryParser} from "@src/utils/formatUtil"
 import {verifyEmail} from "@src/redux/user/actions"
+import userService from "@src/service/userService"
 function VerifyEmail(props){
        
        const handleVerify=()=>{
              if(props.isVerifyEmail){
-                  props.history.push("/login");
+                userService.routeToUserLogin();
              }else{
-                props.history.push("/register");
+                userService.routeToRegister();
              }
        }
        const search = props.location.search;
