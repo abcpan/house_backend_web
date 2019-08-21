@@ -109,7 +109,7 @@ function Person(props){
                         <Button type="primary" onClick={()=>handleClick("auth")}>{isAuth?"修改实名信息":"去实名认证"}</Button>
                 </Row>
             </div>
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
               <EditModal 
                   visible={isShowBaseModal}
                   handleOk={(value)=>handleSubmit("base",value)}
@@ -117,14 +117,14 @@ function Person(props){
                   userInfo={userInfo}
               />
             </Suspense>
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
               <EmailModal
                 visible={isShowEmailModal}
                 handleOk={()=>handleSubmit("email")}
                 handleCancel={()=>{setIsShowEmailModal(preState=>!preState)}}
               />
             </Suspense>
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
                 <AuthModal
                   visible={isShowAuthModal}
                   handleOk={(values)=>handleSubmit("auth",values)}

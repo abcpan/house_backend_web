@@ -6,7 +6,6 @@ import {
 } from "antd"
 import styles from "./index.scss"
 import {connect} from "react-redux"
-import {Redirect} from "react-router-dom"
 import {applyResetPasswd} from "@src/redux/user/actions"
 import userBaseSchema  from '@src/schema/userBaseSchema.js';
 function ApplyPasswd(props){

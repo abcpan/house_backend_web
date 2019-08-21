@@ -90,7 +90,7 @@ function HouseList(props){
     }
     return (
         <div>
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
               <SearchForm
                   onChange={handleChange}
                   params={params}
@@ -159,7 +159,7 @@ function HouseList(props){
                 
               }
             />
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
               <HouseDetailModal
                 visible={isShowDetail}
                 handleOk={()=>setIsShowDetail(pre=>!pre)}
@@ -167,7 +167,7 @@ function HouseList(props){
                 info ={currentHosue}
               />
             </Suspense>
-            <Suspense fallback={<Spin/>}>
+            <Suspense fallback={null}>
                 <HouseEditModal
                   visible={isShowHouseEditModal}
                   handleOk={handleUpdateHouse}
