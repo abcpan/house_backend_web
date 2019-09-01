@@ -34,6 +34,7 @@ function SearchForm(props){
       },500)
     }
     const params= props.params?props.params:{}
+
     return (
         <div style={{marginBottom:30}}>
            <Card title="条件搜索">
@@ -83,7 +84,7 @@ function SearchForm(props){
                     <Form.Item label={houseSchema.location.label}>
                         <LocationPicker
                           onChange={(value)=>handleChange("location",value)}
-                          defaultValue={params.location}
+                          defaultValue={params.location?params.location.split(","):[]}
                         />
                     </Form.Item>
                   </Col>

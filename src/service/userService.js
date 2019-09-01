@@ -203,7 +203,7 @@ class UserService extends Service{
         return isDone;
     }
   /**
-   * 
+   * 页面跳转
    */
   routeToAdminHome(){
     history.push("/admin/home")

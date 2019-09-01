@@ -7,8 +7,9 @@ import {Layout} from "antd"
 import styles from "./index.scss";
 import userService from '@src/service/userService';
 const { Header, Content,Sider } = Layout;
-const isLogin = userService.isLogin
 function AdminLayout (props){
+    //从会话存储中获取是否登录
+    let isLogin =userService.isLogin
     return (
           <Layout className={styles.layout}>
             <Sider  className={styles.side_layout}>
@@ -19,9 +20,11 @@ function AdminLayout (props){
                 <SideHeader/>
               </Header>
               <Content className={styles.content_layout}>
-                  {
+                  { 
+                    
                     isLogin?props.children:<Redirect to="/user/login"/>
                   }
+                  
               </Content>
             </Layout>
           </Layout>
