@@ -7,6 +7,7 @@ import {Layout} from "antd"
 import styles from "./index.scss";
 import userService from '@src/service/userService';
 const { Header, Content,Sider } = Layout;
+const isLogin = userService.isLogin
 function AdminLayout (props){
     return (
           <Layout className={styles.layout}>
@@ -19,7 +20,7 @@ function AdminLayout (props){
               </Header>
               <Content className={styles.content_layout}>
                   {
-                    userService.isLogin?props.children:<Redirect to="/user/login"/>
+                    isLogin?props.children:<Redirect to="/user/login"/>
                   }
               </Content>
             </Layout>

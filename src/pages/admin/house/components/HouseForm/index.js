@@ -94,6 +94,8 @@ function HouseEdit(props){
             }
             values.images=imagesList.map(_=>_.url);
             values.floorplans = floorplansList.map(_=>_.url)
+            values.location = values.location.join(",")
+            values.properties = values.properties.join(",")
             //发送数据
             props.onFetchFormData(values);
         })

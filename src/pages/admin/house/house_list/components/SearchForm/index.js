@@ -27,6 +27,9 @@ function SearchForm(props){
         clearTimeout(ctx.current);
       }
       ctx.current = setTimeout(()=>{
+          if(key==="location"){
+            value = value.join(",");
+          }
           props.onChange({[key]:value})
       },500)
     }

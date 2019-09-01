@@ -65,6 +65,7 @@ function HouseList(props){
           break;
       case SALE:
           if(extra===ON_SALE){
+           
             offHouseAsync(houseId);
           }
           if(extra===OFF_SALE){

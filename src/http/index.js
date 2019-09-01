@@ -6,6 +6,7 @@ import {
   NEED_LOGIN_CODE,
   ILLIGAL_TOKEN_CODE,
   LOGIN_OTHER_CODE,
+  TOKEN_INVALID_CODE,
   SUCCESS_CODE
 } from "@src/consts/code"
 import SessionStorage from './../storage/sessionStorage';
@@ -66,6 +67,9 @@ class HTTP{
             break;
         case LOGIN_OTHER_CODE:
             this.redirectLogin("您的账号已经在别处登录");
+            break;
+        case TOKEN_INVALID_CODE:
+            this.redirectLogin("您的登录态已经过期,需要重新登录");
             break;
         default:
           callback(res); 
